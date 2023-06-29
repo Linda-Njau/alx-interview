@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Function for Pascal's triangle implementation"""
 
+
 def pascal_triangle(n):
     """returns a Pascal's triangle"""
     if n <= 0:
