@@ -2,23 +2,16 @@
 """canUnlockAll function"""
 
 def canUnlockAll(boxes):
-    if not boxes: 
-        return False
-    keys = set()
-    unlocked_boxes = set()
-    
-    keys.update(boxes[0])
-    unlocked_boxes.add(0)
-        
+    keys = set(boxes[0])
+    unlocked_boxes = {0}
+
     while keys:
         new_keys =set()
-        for key in keys.copy():
+        for key in keys:
+            if key in unlocked_boxes:
+                continue
             unlocked_boxes.add(key)
             new_keys.update(boxes[key])
-            keys = new_keys - unlocked_boxes
-        print(f'unlocked boxes:{unlocked_boxes}')
-        print(f'keys:{keys}')
-        
+        keys = new_keys
+     
     return len(unlocked_boxes) ==  len(boxes)
-    
-
