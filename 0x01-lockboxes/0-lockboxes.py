@@ -2,6 +2,8 @@
 """canUnlockAll function"""
 
 def canUnlockAll(boxes):
+    if not boxes: 
+        return False
     keys = set()
     unlocked_boxes = set()
     
@@ -14,6 +16,9 @@ def canUnlockAll(boxes):
             unlocked_boxes.add(key)
             new_keys.update(boxes[key])
             keys = new_keys - unlocked_boxes
+        print(f'unlocked boxes:{unlocked_boxes}')
+        print(f'keys:{keys}')
+        
     return len(unlocked_boxes) ==  len(boxes)
     
 
