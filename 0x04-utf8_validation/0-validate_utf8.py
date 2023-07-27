@@ -1,24 +1,28 @@
 #!/usr/bin/python3
 """validUTF8"""
 
-def validUTF8(data):
-    """validates data encoding"""
-    num_bytes_to_check = 0
 
-    for byte in data:
-        if byte >> 6 == 0b10:
-            if num_bytes_to_check == 0:
+def validUTF8(data):
+    """UTF8 validation"""
+    num_bytes = 0
+    mask_1 = 1 << 7
+    mask_2 = 1 << 6
+
+    for num in data:
+        mask = 1 << 7
+        if num_bytes == 0:
+            while mask & num:
+                num_bytes += 1
+                mask = mask >> 1
+
+            if num_bytes == 0:
+                continue
+
+            if num_bytes == 1 or num_bytes > 4:
                 return False
-            num_bytes_to_check -= 1
+
         else:
-            if byte >> 7 == 0b0:
-                num_bytes_to_check = 0
-            elif byte >> 5 == 0b110:
-                num_bytes_to_check = 1
-            elif byte >> 4 == 0b1110:
-                num_bytes_to_check = 2
-            elif byte >> 3 == 0b11110:
-                num_bytes_to_check = 3
-            else:
+            if not ((num & mask_1) and not (num & mask_2)):
                 return False
-    return num_bytes_to_check == 0
+        num_bytes -= 1
+    return num_bytes == 0
