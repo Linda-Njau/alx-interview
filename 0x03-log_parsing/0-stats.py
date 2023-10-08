@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Log Parsing Interview Question"""
+"""Log Parsing Interview Question solution"""
 import sys
 
 
