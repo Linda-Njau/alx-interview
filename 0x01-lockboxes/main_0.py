@@ -39,3 +39,25 @@ print(canUnlockAll(boxes))  # Expected: True
 boxes = []
 print(canUnlockAll(boxes))  # Expected: False
 
+# Test case 8: Boxes with keys pointing to non-existent boxes
+boxes = [[1], [2], [3], [5]]
+print(canUnlockAll(boxes))  # Expected: False
+
+# Test case 9: Circular dependency between boxes
+boxes = [[1], [2], [0]]
+print(canUnlockAll(boxes))  # Expected: True
+
+# Test case 10: Multiple disconnected sets of boxes
+boxes = [[1, 2], [3, 4], [5], [6], [7], [], [8], [], [9]]
+print(canUnlockAll(boxes))  # Expected: False
+
+# Test case 11: Large number of boxes
+boxes = [[i+1] for i in range(10**6)]
+boxes.append([])
+print(canUnlockAll(boxes))  # Expected: True
+
+# Test case 12: All boxes locked except the first box
+boxes = [[] for _ in range(10**6)]
+boxes[0] = [1]
+print(canUnlockAll(boxes))  # Expected: False
+
